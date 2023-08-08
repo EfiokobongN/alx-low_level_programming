@@ -2,30 +2,71 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 /**
- * strtow - concatenates arguments.
- * @str: String to be splitted.
+ * strtow - splits a string into an array of strings.
+ * @str: String to be split.
  *
- * Return: a pointer to array of String.
+ * Return: a pointer to an array of strings.
  */
 char **strtow(char *str)
 {
-	char *array = NULL;
-	unsigned int i = 0, j = 0, k;
+    if (str == NULL || *str == '\0')
+        return (NULL);
 
-	if (strncmp(str, "", 1) || str == NULL)
-		return (NULL);
-	array = malloc((i + j + 1) * sizeof(char));
-	if (array == NULL)
-		return (NULL);
-	for (k = 0; k < i; k++)
-		array[k] = str[k];
-	i = k;
-	for (k = 0; k < j; k++)
-	{
-		array[i] = str[k];
-		i++;
-	}
-	array[i] = '\0';
-	return (NULL);
+    int word_count = 0;
+    char **words = NULL;
+    char *token = strtok(str, " ");
+
+    while (token)
+    {
+        words = realloc(words, (word_count + 1) * sizeof(char *));
+        if (words == NULL)
+        {
+            /* Handle memory allocation error*/
+            perror("Memory allocation error");
+            exit(EXIT_FAILURE);
+        }
+
+        words[word_count] = strdup(token);
+        if (words[word_count] == NULL)
+        {
+            /* Handle memory allocation error*/
+            perror("Memory allocation error");
+            exit(EXIT_FAILURE);
+        }
+
+        word_count++;
+        token = strtok(NULL, " ");
+    }
+
+    words = realloc(words, (word_count + 1) * sizeof(char *));
+    if (words == NULL)
+    {
+        /*Handle memory allocation error*/
+        perror("Memory allocation error");
+        exit(EXIT_FAILURE);
+    }
+    words[word_count] = NULL; /* NULL-terminate the array*/
+
+    return words;
 }
+
+int main()
+{
+    char input[] = "Talk is cheap. Show me the code.";
+    char **result = strtow(input);
+
+    if (result)
+    {
+        for (int i = 0; result[i] != NULL; i++)
+        {
+            printf("%s\n", result[i]);
+            free(result[i]);
+        }
+        free(result);
+    }
+
+    return 0;
+}
+

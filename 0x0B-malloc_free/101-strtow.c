@@ -1,72 +1,43 @@
-#include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "main.h"
 
 /**
- * strtow - splits a string into an array of strings.
- * @str: String to be split.
- *
- * Return: a pointer to an array of strings.
- */
+* **strtow - function that splits a string into words.
+* @str : pointer
+* Return: Char
+*/
+
 char **strtow(char *str)
 {
-    if (str == NULL || *str == '\0')
-        return (NULL);
+	char **d;
+	int i;
+	int j = 0;
+	int con = 0;
 
-    int word_count = 0;
-    char **words = NULL;
-    char *token = strtok(str, " ");
+	if (str == NULL)
+		return (NULL);
 
-    while (token)
-    {
-        words = realloc(words, (word_count + 1) * sizeof(char *));
-        if (words == NULL)
-        {
-            /* Handle memory allocation error*/
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
+	for (i = 0 ; str[i] != '\0' ; i++)
+	{
+		if (str[i] != 32)
+			con++;
+	}
 
-        words[word_count] = strdup(token);
-        if (words[word_count] == NULL)
-        {
-            /* Handle memory allocation error*/
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
+	d = malloc(sizeof(char) * con);
 
-        word_count++;
-        token = strtok(NULL, " ");
-    }
+	if (d == NULL)
+		return (NULL);
 
-    words = realloc(words, (word_count + 1) * sizeof(char *));
-    if (words == NULL)
-    {
-        /*Handle memory allocation error*/
-        perror("Memory allocation error");
-        exit(EXIT_FAILURE);
-    }
-    words[word_count] = NULL; /* NULL-terminate the array*/
-
-    return words;
+	for (i = 0 ; str[i] != '\0' ; i++)
+	{
+		if (str[i] != 32)
+		{
+			*d[j] = str[i];
+			j++;
+		}
+		else
+		{
+		}
+	}
+	return (d);
 }
-
-int main()
-{
-    char input[] = "Talk is cheap. Show me the code.";
-    char **result = strtow(input);
-
-    if (result)
-    {
-        for (int i = 0; result[i] != NULL; i++)
-        {
-            printf("%s\n", result[i]);
-            free(result[i]);
-        }
-        free(result);
-    }
-
-    return 0;
-}
-

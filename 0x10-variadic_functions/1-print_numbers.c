@@ -1,10 +1,10 @@
 #include "variadic_functions.h"
 
 /**
- * print_numbers - prints numbers followed by a new line
- * @n: number of parameter
+ * print_numbers - numbers to be prints then followed by a new line
+ * @n: parameter number
  * @separator: separator between two numbers
- * Return: Always 0
+ * Return:Return NULL Always 0
  */
 
 void print_numbers(const char *separator, const unsigned int n, ...)

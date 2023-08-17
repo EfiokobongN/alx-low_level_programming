@@ -1,9 +1,9 @@
 #include "variadic_functions.h"
 
 /**
- * print_all - Prints all of the arguments when specified
- * @format: specifies the necessary operations
- * Return: void
+ * print_all - All arguments to be prints when specified
+ * @format: necessary operations should be specified
+ * Return: Returned void
  */
 
 void print_all(const char * const format, ...)

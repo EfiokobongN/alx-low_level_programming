@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 /**
- * insert_nodeint_at_index -  function that inserts a new node at a given position.
+ * insert_nodeint_at_index - inserting a new node  postion
  * @head: a double pointer
- * @idx: index of the listof node to be added
- * @n: new node or NULL if it failed
+ * @idx: node index
+ * @n: node value
  *
- * Return: the address of new node
+ * Return: new node address
  */
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {

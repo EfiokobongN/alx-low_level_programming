@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 /**
- * add_nodeint_end - function that adds a new node at the end of a listint_t list.
+ * add_nodeint_end - function that adds a new node at the end of a listint_t list
  *
  * @h: double pointer
  * @n: int add
- * Return: address of the new element, or NULL if it failed
+ * Return: address of new element or NULL if it failed
  *
  */
 

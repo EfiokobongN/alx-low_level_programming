@@ -1,5 +1,5 @@
 #include "lists.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * add_nodeint - a function that adds a new node at the beginning of a listint_t
@@ -9,15 +9,18 @@
  * Return: NULL if it failed
  *
  */
-
 listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *new_node = (listint_t *) malloc(sizeof(listint_t));
+	listint_t *ptr;
 
-	if (new_node == NULL)
+	if (head == NULL)
 		return (NULL);
-	new_node->n = n;
-	new_node->next = (*head);
-	(*head) = new_node;
+	ptr = malloc(sizeof(listint_t));
+	if (ptr == NULL)
+		return (NULL);
+
+	ptr->n = n;
+	ptr->next = *head;
+	*head = ptr;
 	return (*head);
 }

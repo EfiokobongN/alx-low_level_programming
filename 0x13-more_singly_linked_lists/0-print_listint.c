@@ -2,14 +2,14 @@
 #include <stdio.h>
 
 /**
- * print_listint - prints all elements of a listint_t
+ * print_list - prints all elements of a listint_t
  *
  * @h: h linklist node
  *
  * Return: numbers of nodes
  *
  */
-size_t print_listint(const listint_t *h)
+size_t print_list(const list_t *h)
 {
 	size_t count = 0;
 

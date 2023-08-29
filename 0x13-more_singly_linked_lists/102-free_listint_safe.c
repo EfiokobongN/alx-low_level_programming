@@ -1,6 +1,5 @@
 #include "lists.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /**
  * _ra - reallocates memory  array 
@@ -11,22 +10,22 @@
  *
  * Return: pointer new list
  */
-listint_t **_ra(listint_t **list, size_t size, listint_t *new)
+listint_t *find_listint_loop_fl(listint_t *head)
 {
-	listint_t **newlist;
-	size_t i;
+	listint_t *ptr, *end;
 
-	newlist = malloc(size * sizeof(listint_t *));
-	if (newlist == NULL)
+	if (head == NULL)
+		return (NULL);
+
+	for (end = head->next; end != NULL; end = end->next)
 	{
-		free(list);
-		exit(98);
+		if (end == end->next)
+			return (end);
+		for (ptr = head; ptr != end; ptr = ptr->next)
+			if (ptr == end->next)
+				return (end->next);
 	}
-	for (i = 0; i < size - 1; i++)
-		newlist[i] = list[i];
-	newlist[i] = new;
-	free(list);
-	return (newlist);
+	return (NULL);
 }
 
 /**
@@ -35,31 +34,34 @@ listint_t **_ra(listint_t **list, size_t size, listint_t *new)
  *
  * Return: nodes number list
  */
-size_t free_listint_safe(listint_t **head)
+size_t free_listint_safe(listint_t **h)
 {
-	size_t i, num = 0;
-	listint_t **list = NULL;
-	listint_t *next;
+	listint_t *next, *loopnode;
+	size_t len;
+	int loop = 1;
 
-	if (head == NULL || *head == NULL)
-		return (num);
-	while (*head != NULL)
+	if (h == NULL || *h == NULL)
+		return (0);
+
+	loopnode = find_listint_loop_fl(*h);
+	for (len = 0; (*h != loopnode || loop) && *h != NULL; *h = next)
 	{
-		for (i = 0; i < num; i++)
+		len++;
+		next = (*h)->next;
+		if (*h == loopnode && loop)
 		{
-			if (*head == list[i])
+			if (loopnode == loopnode->next)
 			{
-				*head = NULL;
-				free(list);
-				return (num);
+				free(*h);
+				break;
 			}
+			len++;
+			next = next->next;
+			free((*h)->next);
+			loop = 0;
 		}
-		num++;
-		list = _ra(list, num, *head);
-		next = (*head)->next;
-		free(*head);
-		*head = next;
+		free(*h);
 	}
-	free(list);
-	return (num);
+	*h = NULL;
+	return (len);
 }

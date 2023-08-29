@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
  * get_nodeint_at_index - unction that returns the nth node of a listint_t linked list.

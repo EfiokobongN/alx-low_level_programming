@@ -6,12 +6,12 @@
 #include <fcntl.h>
 #include <stdio.h>
 /**
- * close_errchk - closes a file descriptor and prints
+ * close_errchk - prints and closes file descriptor
  * an error message if it fails
  *
- * @fd: file descriptor to close
+ * @fd: close file descriptor
  *
- * Return: 0 on success, -1 on failure
+ * Return: 0 if success, -1 if failure
  */
 int close_errchk(int fd)
 {
@@ -27,11 +27,11 @@ int close_errchk(int fd)
 }
 
 /**
- * write_err - error handler for a write error
+ * write_err - write error error handler
  *
- * @fd1: first descriptor to close
- * @fd2: second descriptor to close
- * @filename: filename prompting the error
+ * @fd1: first descriptor closes
+ * @fd2: second descriptor closes
+ * @filename: filename prompting error
  *
  * Return: 99
  */
@@ -44,11 +44,11 @@ int write_err(int fd1, int fd2, char *filename)
 }
 
 /**
- * read_err - error handler for a read error
+ * read_err - read error error handler
  *
- * @fd1: first descriptor to close
- * @fd2: second descriptor to close
- * @filename: filename prompting the error
+ * @fd1: first descriptor closes
+ * @fd2: second descriptor closes
+ * @filename: filename prompting error
  *
  * Return: 98
  */
@@ -61,14 +61,14 @@ int read_err(int fd1, int fd2, char *filename)
 }
 
 /**
- * main - copy one file to another, new file with perms 664
+ * main - copy file to another new file with perms 664
  * usage - cp file_from file_to
  *
- * @ac: number of arg
- * @av: list of args
+ * @ac: arg number
+ * @av: args list
  *
  * Return: 97 if incorrect num of args
- * 98 if file_from does not exist or unreadable
+ * 98 if file_from not exist or unreadable
  * 99 if write fails
  * 100 if file close fails
  * 0 otherwise

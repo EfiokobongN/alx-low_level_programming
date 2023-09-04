@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 /**
- * create_file - creates and puts text inside file
+ * append_text_to_file - creates and puts text inside file
  * with 600 perms
  *
  * @filename: file name
